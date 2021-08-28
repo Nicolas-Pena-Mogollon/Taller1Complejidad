@@ -1,3 +1,6 @@
+import random
+
+
 class Sort:
     def __init__(self):
         pass
@@ -10,3 +13,9 @@ class Sort:
                     array[i] = array[j]
                     array[j] = aux
         return array
+
+    def createRandomList(self, quantity):
+        randomList = []
+        for i in range(quantity):
+            randomList.append(random.randint(0, quantity))
+        return randomList

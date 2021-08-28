@@ -9,28 +9,75 @@ class Controller:
         self.coordinateMenu()
 
     def coordinateMenu(self):
-        option = "5"
-        while option != "0":
-            typeNumber = self.view.askNumberType()
-            if typeNumber == "1":
-                print("Numeros aleatorios")
-            elif typeNumber == "2":
-                print("Numeros manuales")
+        number_type = "3"
+        array = []
+        while number_type != "0":
+            number_type = self.view.askNumberType()
+
+            # Se pide el tipo de entrada
+            if number_type == "0":
+                self.view.printData("Gracias!")
+
+            elif number_type == "1":
+                # Aleatorios
+                random_quantity = self.manageRandomNumOption()
+                if random_quantity == 0: break
+                array = self.model.createRandomList(random_quantity)
+
+            elif number_type == "2":
+                array = self.manageManualOption()
+                if len(array) == 0: continue
+
             else:
-                print("Opción incorrecta")
+                self.view.printData("Opción incorrecta")
                 continue
 
-            option = self.view.askSortOption()
-            if option == "1":
-                self.model.doBubbleSort()
-            elif option == "2":
-                self.model.doBubbleSort()
-            elif option == "3":
-                self.model.doBubbleSort()
-            elif option == "4":
-                self.model.doBubbleSort()
-            elif option == "5":
-                self.model.doBubbleSort()
+            self.manageSortOption(array)
+
+    def manageSortOption(self, numbers_array):
+        sort_option = ""
+        while sort_option != "0":
+            sort_option = self.view.askSortOption()
+            if sort_option == "0":
+                self.view.printData("Gracias!")
+            elif sort_option == "1":
+                self.model.doBubbleSort(numbers_array)
+            elif sort_option == "2":
+                self.model.doBubbleSort(numbers_array)
+            elif sort_option == "3":
+                self.model.doBubbleSort(numbers_array)
+            elif sort_option == "4":
+                self.model.doBubbleSort(numbers_array)
+            elif sort_option == "5":
+                self.model.doBubbleSort(numbers_array)
             else:
-                print("Opción incorrecta")
-                continue
+                self.view.printData("Opción incorrecta")
+
+    def manageRandomNumOption(self):
+        rand_num_option = ""
+        while rand_num_option != "0":
+            rand_num_option = self.view.askNumberQuantity()
+            if rand_num_option == "0":
+                return 0
+            elif rand_num_option == "1":
+                return 4000
+            elif rand_num_option == "2":
+                return 40000
+            elif rand_num_option == "3":
+                return 400000
+            elif rand_num_option == "4":
+                return 4000000
+            elif rand_num_option == "5":
+                return 40000000
+            else:
+                self.view.printData("Opción incorrecta")
+
+    def manageManualOption(self):
+        num_array = self.view.askForNumbers().split(",")
+        try:
+            for i in range(len(num_array)):
+                num_array[i] = int(num_array[i].strip())
+            return num_array
+        except ValueError:
+            self.view.printData("Ha ingresado valores diferentes a números!")
+            return []
