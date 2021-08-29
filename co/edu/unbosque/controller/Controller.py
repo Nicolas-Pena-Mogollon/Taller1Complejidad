@@ -1,3 +1,5 @@
+import time
+
 from co.edu.unbosque.view.View import View
 from co.edu.unbosque.model.Model import Sort
 
@@ -21,35 +23,44 @@ class Controller:
             elif number_type == "1":
                 # Aleatorios
                 random_quantity = self.manageRandomNumOption()
-                if random_quantity == 0: break
+                if random_quantity == 0:
+                    break
                 array = self.model.createRandomList(random_quantity)
 
             elif number_type == "2":
                 array = self.manageManualOption()
-                if len(array) == 0: continue
+                if len(array) == 0:
+                    continue
 
             else:
                 self.view.printData("Opción incorrecta")
                 continue
 
-            self.manageSortOption(array)
+            print(self.manageSortOption(array))
 
     def manageSortOption(self, numbers_array):
         sort_option = ""
         while sort_option != "0":
             sort_option = self.view.askSortOption()
+
             if sort_option == "0":
                 self.view.printData("Gracias!")
             elif sort_option == "1":
-                self.model.doBubbleSort(numbers_array)
+                return self.model.doBubbleSort(numbers_array)
             elif sort_option == "2":
-                self.model.doBubbleSort(numbers_array)
+                return self.model.doSelectionSort(numbers_array)
             elif sort_option == "3":
-                self.model.doBubbleSort(numbers_array)
+                return self.model.doBubbleSort(numbers_array)
             elif sort_option == "4":
-                self.model.doBubbleSort(numbers_array)
+
+                print("firstQuick")
+                beforeTime = time.time()
+                array = self.model.doQuickSort(numbers_array)
+                lastTime = (time.time() - beforeTime) * 1000
+                print(lastTime)
+                return array
             elif sort_option == "5":
-                self.model.doBubbleSort(numbers_array)
+                return self.model.merge_sort(numbers_array)
             else:
                 self.view.printData("Opción incorrecta")
 
