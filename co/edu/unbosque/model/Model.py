@@ -6,7 +6,26 @@ class Sort:
     def __init__(self):
         pass
 
+    def createRandomList(self, quantity):
+        """
+        Genera una lista de números aleatorios de acuerdo a la cantidad que se pida
+
+        :param quantity: tamaño de la lista de número aleatorios
+        :return: lista de números aleatorios
+        """
+        randomList = []
+        for i in range(quantity):
+            randomList.append(random.randint(0, quantity))
+        return randomList
+
     def doBubbleSort(self, array):
+        """
+        Ordena el arreglo comparando cada número del arreglo con los demás números
+        de este y si alguno de estos es menor, intercambia la posición
+
+        :param array: arreglo desordenado
+        :return: arreglo ordenado
+        """
         for i in range(len(array) - 1):
             for j in range(i, len(array)):
                 if array[i] > array[j]:
@@ -15,13 +34,16 @@ class Sort:
                     array[j] = aux
         return array
 
-    def createRandomList(self, quantity):
-        randomList = []
-        for i in range(quantity):
-            randomList.append(random.randint(0, quantity))
-        return randomList
-
     def doSelectionSort(self, array):
+        """
+        Ordena el arreglo guardando la posición del número mínimo, que se obtiene comparando
+        el número de la posición del supuesto número mínimo con los números de las demás posiciones.
+        Luego de esto, si la posición del número mínimo cambió, se intercambian la posición del número
+        mínimo anterios y la del nuevo
+
+        :param array: arreglo desordenado
+        :return: arreglo ordenado
+        """
         for i in range(len(array) - 1):
             minim = i
             for j in range(i + 1, len(array)):
@@ -34,30 +56,50 @@ class Sort:
         return array
 
     def doRadixSort(self, array):
-        radix = 10
-        maxLen = False
-        tmp = -1
-        lugar = 1
-        while not maxLen:
-            maxLen = True
-            buckets = [list() for _ in range(radix)]
+        """
+        Crea un arreglo bidimensional de 1x10 y almacena los números en este según su valor posicional (decimales)
+        y su dígito más significativo, luego de esto, los sobrescribe el arreglo original en ese nuevo orden,
+        buscando desde unidades, decenas, en adelante.
+
+        :param array: arreglo desordenado
+        :return: arreglo ordenado
+        """
+        bucketsLength = 10
+        maxLenNum = False
+        decimalCount = 1  # Se inicializa decimalCount en 1
+        while not maxLenNum:
+            maxLenNum = True
+            buckets = [list() for _ in range(bucketsLength)]  # Creación arreglo bidimensional
 
             for i in array:
-                tmp = int(i / lugar)
-                buckets[tmp % radix].append(i)
-                if maxLen and tmp > 0:
-                    maxLen = False
+                # Se divide el elemento del arreglo entre unidad, decena, etc, dependiendo el recorrido
+                tmp = int(i / decimalCount)
+                # Se determina en que sub arreglo se va a añadir y se agrega
+                buckets[tmp % bucketsLength].append(i)
+                # Determina si ese número es el más largo
+                if maxLenNum and tmp > 0:
+                    maxLenNum = False
 
-            a = 0
-            for b in range(radix):
-                buck = buckets[b]
+            arrayPos = 0
+            # Se sobrescribe el arreglo original con los números en el orden en el que estan en el arreglo buckets
+            for j in range(bucketsLength):
+                buck = buckets[j]
                 for i in buck:
-                    array[a] = i
-                    a += 1
-            lugar *= radix
+                    array[arrayPos] = i
+                    arrayPos += 1
+            decimalCount *= bucketsLength
         return array
 
     def doQuickSort(self, array):
+        """
+        Ordena el arreglo, dividiendolo en tres sub listas, donde el pivote es el primer número del arreglo.
+        Las sublistas se llenan con los números menores que el pivote a la lista izquierda, mayores a la lista derecha
+        e iguales a la lista centro, luego, hace una llamada recursiva con la lista de la izquierda y la derecha,
+        concatenandolas con la del centro
+
+        :param array: arreglo desordenado
+        :return: arreglo ordenado
+        """
         left = []
         center = []
         right = []
@@ -74,45 +116,51 @@ class Sort:
         else:
             return array
 
-    # Función merge_sort
-    def merge_sort(self, lista):
-
+    def merge_sort(self, array):
         """
-        Lo primero que se ve en el psudocódigo es un if que
-        comprueba la longitud de la lista. Si es menor que 2, 1 o 0, se devuelve la lista.
-        ¿Por que? Ya esta ordenada.
-        """
-        if len(lista) < 2:
-            return lista
+        Divide el arreglo por la mitad y con llamadas recursivas continua dividiendolo hasta que queden arreglos
+        individuales, para luego retornar el resultado de la mezcla de estos hasta obtener el arreglo principal
 
-        # De lo contrario, se divide en 2
+        :param array: arreglo desordenado
+        :return: arreglo ordenado
+        """
+        if len(array) < 2:  # Si es menor que dos, no se divide y lo retorna
+            return array
+
+
         else:
-            middle = len(lista) // 2
-            right = self.merge_sort(lista[:middle])
-            left = self.merge_sort(lista[middle:])
+            middle = len(array) / 2  # Se divide la longitud del arreglo a la mitad
+            right = self.merge_sort(array[:middle])  # Merge sort a la primera mitad
+            left = self.merge_sort(array[middle:])  # Merge sort a la segunda mitad
             return self.merge(right, left)
 
-    # Función merge
-    def merge(self, lista1, lista2):
-        """
-        merge se encargara de intercalar los elementos de las dos
-        divisiones.
-        """
-        i, j = 0, 0  # Variables de incremento
-        result = []  # Lista de resultado
+    def merge(self, right, left):
 
-        # Intercalar ordenadamente
-        while (i < len(lista1) and j < len(lista2)):
-            if (lista1[i] < lista2[j]):
-                result.append(lista1[i])
+        """
+        Se intercala y ordena la división de los arreglos, comparando los números de ambos
+
+        :param right: primera mitad del arreglo
+        :param left: segunda mitad del arreglo
+        :return: resultado de ordenar los arreglos
+        """
+        i = 0
+        j = 0
+        result = []
+
+        '''
+        Compara los números de ambos arreglos,hasta que en la lista de resultados se hayan incluido todos los números
+        de alguna de ambas listas
+        '''
+        while i < len(right) and j < len(left):
+            if right[i] < left[j]:
+                result.append(right[i])
                 i += 1
             else:
-                result.append(lista2[j])
+                result.append(left[j])
                 j += 1
 
-        # Agregamos los resultados a la lista
-        result += lista1[i:]
-        result += lista2[j:]
+        # Se añaden a la lista resultante los números faltantes
+        result += right[i:]
+        result += left[j:]
 
-        # Retornamos el resultados
         return result
