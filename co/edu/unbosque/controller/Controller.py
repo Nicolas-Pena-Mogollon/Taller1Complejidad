@@ -50,7 +50,7 @@ class Controller:
             elif sort_option == "2":
                 return self.model.doSelectionSort(numbers_array)
             elif sort_option == "3":
-                return self.model.doBubbleSort(numbers_array)
+                return self.model.doRadixSort(numbers_array)
             elif sort_option == "4":
 
                 print("firstQuick")

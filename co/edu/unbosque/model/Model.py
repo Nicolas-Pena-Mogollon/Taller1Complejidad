@@ -34,8 +34,29 @@ class Sort:
         return array
 
     def doRadixSort(self, array):
-        for i in range(len(array)):
-            array
+        radix = 10
+        maxLen = False
+        tmp = -1
+        lugar = 1
+        while not maxLen:
+            maxLen = True
+            buckets = [list() for _ in range(radix)]
+
+            for i in array:
+
+                tmp = int(i / lugar)
+                buckets[tmp % radix].append(i)
+                if maxLen and tmp > 0:
+                    maxLen = False
+
+            a = 0
+            for b in range(radix):
+                buck = buckets[b]
+                for i in buck:
+                    array[a] = i
+                    a += 1
+            lugar *= radix
+        return array
 
     def doQuickSort(self, array):
         left = []
@@ -55,7 +76,7 @@ class Sort:
             return array
 
     # Función merge_sort
-    def merge_sort(self,lista):
+    def merge_sort(self, lista):
 
         """
         Lo primero que se ve en el psudocódigo es un if que
@@ -73,7 +94,7 @@ class Sort:
             return self.merge(right, left)
 
     # Función merge
-    def merge(self,lista1, lista2):
+    def merge(self, lista1, lista2):
         """
         merge se encargara de intercalar los elementos de las dos
         divisiones.
