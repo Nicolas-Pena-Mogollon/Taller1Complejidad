@@ -1,5 +1,4 @@
 import random
-import time
 
 
 class Sort:
@@ -28,7 +27,7 @@ class Sort:
         """
         for i in range(len(array) - 1):
             for j in range(i, len(array)):
-                if array[i] > array[j]:
+                if array[i] < array[j]:
                     aux = array[i]
                     array[i] = array[j]
                     array[j] = aux
@@ -47,7 +46,7 @@ class Sort:
         for i in range(len(array) - 1):
             minim = i
             for j in range(i + 1, len(array)):
-                if array[j] < array[minim]:
+                if array[j] > array[minim]:
                     minim = j
             if minim != i:
                 ordered_num = array[i]
@@ -75,7 +74,7 @@ class Sort:
                 # Se divide el elemento del arreglo entre unidad, decena, etc, dependiendo el recorrido
                 tmp = int(i / decimalCount)
                 # Se determina en que sub arreglo se va a añadir y se agrega
-                buckets[tmp % bucketsLength].append(i)
+                buckets[9 - (tmp % bucketsLength)].append(i)
                 # Determina si ese número es el más largo
                 if maxLenNum and tmp > 0:
                     maxLenNum = False
@@ -106,11 +105,13 @@ class Sort:
         if len(array) > 1:
             pivot = array[0]
             for i in array:
-                if i < pivot:
+                # Para ascendente <
+                if i > pivot:
                     left.append(i)
                 elif i == pivot:
                     center.append(i)
-                elif i > pivot:
+                # Para ascendente >
+                elif i < pivot:
                     right.append(i)
             return self.doQuickSort(left) + center + self.doQuickSort(right)
         else:
@@ -129,7 +130,7 @@ class Sort:
 
 
         else:
-            middle = len(array) / 2  # Se divide la longitud del arreglo a la mitad
+            middle = int(len(array) / 2)  # Se divide la longitud del arreglo a la mitad
             right = self.merge_sort(array[:middle])  # Merge sort a la primera mitad
             left = self.merge_sort(array[middle:])  # Merge sort a la segunda mitad
             return self.merge(right, left)
@@ -152,7 +153,8 @@ class Sort:
         de alguna de ambas listas
         '''
         while i < len(right) and j < len(left):
-            if right[i] < left[j]:
+            # Para ascendente <
+            if right[i] > left[j]:
                 result.append(right[i])
                 i += 1
             else:
