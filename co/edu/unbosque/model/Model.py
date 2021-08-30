@@ -43,7 +43,6 @@ class Sort:
             buckets = [list() for _ in range(radix)]
 
             for i in array:
-
                 tmp = int(i / lugar)
                 buckets[tmp % radix].append(i)
                 if maxLen and tmp > 0:
