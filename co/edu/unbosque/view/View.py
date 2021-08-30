@@ -4,7 +4,7 @@ class View:
 
     def askSortOption(self):
         """
-            Menú para pedir el tipo de algoritmo de ordenamiento
+        Pide el tipo de algoritmo de ordenamiento
 
         :return: opción del menú escogida
         """
@@ -15,7 +15,7 @@ class View:
 
     def askNumberQuantity(self):
         """
-            Menú para pedir la cantidad de números a generar en aleatorio
+        Pide la cantidad de números a generar en aleatorio
 
         :return: opción del menú escogida
         """
@@ -25,7 +25,7 @@ class View:
 
     def askNumberType(self):
         """
-            Menú para pedir que tipo de entrada solicitar (aleatoria o manual)
+        Pide que tipo de entrada solicitar (aleatoria o manual)
 
         :return: opción del menú escogida
         """
@@ -35,7 +35,7 @@ class View:
 
     def askForNumbers(self):
         """
-            Ingreso de los números escogidos manualmente
+        Pide y recibe los números escogidos manualmente
 
         :return: opción del menú escogida
         """
@@ -43,4 +43,9 @@ class View:
         return numbers
 
     def printData(self, data):
+        """
+        Imprime la información ingresada
+
+        :param data: la información a imprimir
+        """
         print(data)
