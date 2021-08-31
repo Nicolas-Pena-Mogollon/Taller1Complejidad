@@ -60,26 +60,35 @@ class Controller:
             if sort_option == "0":
                 self.view.printData("Gracias!")
             elif sort_option == "1":
-                print("firstQuick")
                 beforeTime = time.time()
                 array = self.model.doBubbleSort(numbers_array)
-                lastTime = (time.time() - beforeTime)
+                lastTime = (time.time() - beforeTime) * 1000
                 print(lastTime)
                 return array
             elif sort_option == "2":
-                return self.model.doSelectionSort(numbers_array)
+                beforeTime = time.time()
+                array = self.model.doSelectionSort(numbers_array)
+                lastTime = (time.time() - beforeTime) * 1000
+                print(lastTime)
+                return array
             elif sort_option == "3":
-                return self.model.doRadixSort(numbers_array)
+                beforeTime = time.time()
+                array = self.model.doRadixSort(numbers_array)
+                lastTime = (time.time() - beforeTime) * 1000
+                print(lastTime)
+                return array
             elif sort_option == "4":
-
-                print("firstQuick")
                 beforeTime = time.time()
                 array = self.model.doQuickSort(numbers_array)
                 lastTime = (time.time() - beforeTime) * 1000
                 print(lastTime)
                 return array
             elif sort_option == "5":
-                return self.model.merge_sort(numbers_array)
+                beforeTime = time.time()
+                array = self.model.merge_sort(numbers_array)
+                lastTime = (time.time() - beforeTime) * 1000
+                print(lastTime)
+                return array
             else:
                 self.view.printData("Opción incorrecta")
 
