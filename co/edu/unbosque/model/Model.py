@@ -61,7 +61,7 @@ class Sort:
                     array[i] = array[j]
                     array[j] = aux
 
-        return before_time - time.time()
+        return time.time() - before_time
 
     def doSelectionSort(self, array):
         """
@@ -84,7 +84,7 @@ class Sort:
                 array[i] = array[minim]
                 array[minim] = ordered_num
 
-        return before_time - time.time()
+        return time.time() - before_time
 
     def doRadixSort(self, array):
         """
@@ -129,7 +129,7 @@ class Sort:
         smaller = []
         equal = []
         larger = []
-        pivot = array[int(len(array)/2)]
+        pivot = array[int(len(array) / 2)]
 
         for x in array:
             if x < pivot:
