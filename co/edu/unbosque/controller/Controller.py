@@ -59,9 +59,9 @@ class Controller:
                 self.view.printData("Gracias!")
                 return -1
             elif sort_option == "1":
-                return self.model.doBubbleSort(numbers_array)
+                print(self.model.doBubbleSort(numbers_array))
             elif sort_option == "2":
-                return self.model.doSelectionSort(numbers_array)
+                print(self.model.doSelectionSort(numbers_array))
             elif sort_option == "3":
                 beforeTime = time.time()
                 array = self.model.doRadixSort(numbers_array)

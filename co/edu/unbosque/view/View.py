@@ -20,7 +20,7 @@ class View:
         :return: opción del menú escogida
         """
         option = input("Escoja la cantidad de numeros a generar\n0. Salir\n1. 4000\n2. 40000" +
-                       "\n3. 400000 Números \n4. 4000000\n5. 40000000")
+                       "\n3. 400000 \n4. 4000000\n5. 40000000")
         return option
 
     def askNumberType(self):
@@ -29,7 +29,7 @@ class View:
 
         :return: opción del menú escogida
         """
-        numberType = input("Escoja el tipo de ingreso de datos:\n0. Salir\n1. Números aleatorios" +
+        numberType = input("Escoja el tipo de ingreso de datos:\n0. Salir\n1. Generar automaticamente" +
                            "\n2. Ingreso manual")
         return numberType
 
