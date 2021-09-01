@@ -125,23 +125,23 @@ class Sort:
     def quickSort(self, array):
         if len(array) <= 1:
             return array
-        smaller = []
+        left = []
         equal = []
-        larger = []
+        right = []
         pivot = array[int(len(array) / 2)]
 
         for x in array:
             if x < pivot:
-                smaller.append(x)
+                left.append(x)
             elif x == pivot:
                 equal.append(x)
             else:
-                larger.append(x)
+                right.append(x)
 
-        larger = self.quickSort(larger)
-        smaller = self.quickSort(smaller)
+        right = self.quickSort(right)
+        left = self.quickSort(left)
 
-        final = larger + equal + smaller
+        final = right + equal + left
         return final
 
     def merge_sort(self, array):

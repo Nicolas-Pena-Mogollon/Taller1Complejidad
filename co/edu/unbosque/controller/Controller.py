@@ -1,7 +1,7 @@
 import time
 
 from co.edu.unbosque.view.View import View
-from co.edu.unbosque.model.Model import Sort
+from co.edu.unbosque.model.Sort import Sort
 
 
 class Controller:
