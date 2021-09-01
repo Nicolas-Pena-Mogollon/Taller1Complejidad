@@ -59,27 +59,33 @@ class Controller:
                 self.view.printData("Gracias!")
                 return -1
             elif sort_option == "1":
-                print(self.model.doBubbleSort(numbers_array))
+                print("Espere mientras se organizan los valores")
+                print("El tiempo obtenido fue: " + str(self.model.doBubbleSort(numbers_array)))
+                return 0
             elif sort_option == "2":
-                print(self.model.doSelectionSort(numbers_array))
+                print("Espere mientras se organizan los valores")
+                print("El tiempo obtenido fue: " + str(self.model.doSelectionSort(numbers_array)))
+                return 0
+
             elif sort_option == "3":
+                print("Espere mientras se organizan los valores")
                 beforeTime = time.time()
-                array = self.model.doRadixSort(numbers_array)
-                lastTime = (time.time() - beforeTime)
-                print(lastTime)
-                return array
+                self.model.doRadixSort(numbers_array)
+                print("El tiempo obtenido fue: " + str((time.time() - beforeTime)))
+                return 0
+
             elif sort_option == "4":
+                print("Espere mientras se organizan los valores")
                 beforeTime = time.time()
-                array = self.model.quickSort(numbers_array)
-                lastTime = (time.time() - beforeTime)
-                print(lastTime)
-                return array
+                self.model.quickSort(numbers_array)
+                print("El tiempo obtenido fue: " + str((time.time() - beforeTime)))
+                return 0
             elif sort_option == "5":
+                print("Espere mientras se organizan los valores")
                 beforeTime = time.time()
-                array = self.model.merge_sort(numbers_array)
-                lastTime = (time.time() - beforeTime)
-                print(lastTime)
-                return array
+                self.model.merge_sort(numbers_array)
+                print("El tiempo obtenido fue: " + str((time.time() - beforeTime)))
+                return 0
             else:
                 self.view.printData("Opción incorrecta")
 
@@ -120,18 +126,21 @@ class Controller:
                 quantity = self.manageRandomNumOption()
                 if quantity == 0:
                     return []
+                print("Espere mientras se generan los números")
                 return self.model.createAscendingList(quantity)
 
             elif order_option == "2":
                 quantity = self.manageRandomNumOption()
                 if quantity == 0:
                     return []
+                print("Espere mientras se generan los números")
                 return self.model.createDescendingList(quantity)
 
             elif order_option == "3":
                 quantity = self.manageRandomNumOption()
                 if quantity == 0:
                     return []
+                print("Espere mientras se generan los números")
                 return self.model.createRandomList(quantity)
 
             else:

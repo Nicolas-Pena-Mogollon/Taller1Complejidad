@@ -56,7 +56,6 @@ class Sort:
         for i in range(len(array) - 1):
             for j in range(i, len(array)):
                 if array[i] < array[j]:
-                    print("Verga sapo perro hp")
                     aux = array[i]
                     array[i] = array[j]
                     array[j] = aux
