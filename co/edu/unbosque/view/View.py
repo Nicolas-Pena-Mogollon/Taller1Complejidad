@@ -42,6 +42,16 @@ class View:
         numbers = input("Ingrese los números separados por comas ej: '1,2,3'")
         return numbers
 
+    def askNumbersOrder(self):
+        """
+        Pide el tipo de orden que se quiera usar
+
+        :return: opción del menú escogida
+        """
+        option = input("¿Qué orden desea?\n0. Salir\n1. Ascendente\n2. Descendente" +
+                       "\n3. Aleatorio")
+        return option
+
     def printData(self, data):
         """
         Imprime la información ingresada

@@ -1,4 +1,5 @@
 import random
+import time
 
 
 class Sort:
@@ -17,32 +18,61 @@ class Sort:
             randomList.append(random.randint(0, quantity))
         return randomList
 
+    def createAscendingList(self, quantity):
+        """
+        Genera una lista de números ordenados ascendentemente, de acuerdo a la cantidad que se pida
+
+        :param quantity: tamaño de la lista
+        :return: lista de números
+        """
+        array = []
+        for i in range(quantity):
+            array.append(i)
+        return array
+
+    def createDescendingList(self, quantity):
+        """
+        Genera una lista de números ordenados descendentemente, de acuerdo a la cantidad que se pida
+
+        :param quantity: tamaño de la lista
+        :return: lista de números
+        """
+        array = []
+        for i in range(quantity, 0, -1):
+            array.append(i)
+        return array
+
     def doBubbleSort(self, array):
         """
         Ordena el arreglo comparando cada número del arreglo con los demás números
-        de este y si alguno de estos es menor, intercambia la posición
+        de este y si alguno de estos es menor, intercambia la posición. Mide el tiempo
+        que demora el ordenamiento
 
         :param array: arreglo desordenado
-        :return: arreglo ordenado
+        :return: tiempo que demora el ordenamiento
         """
+        before_time = time.time()
+
         for i in range(len(array) - 1):
             for j in range(i, len(array)):
                 if array[i] < array[j]:
                     aux = array[i]
                     array[i] = array[j]
                     array[j] = aux
-        return array
+
+        return before_time - time.time()
 
     def doSelectionSort(self, array):
         """
         Ordena el arreglo guardando la posición del número mínimo, que se obtiene comparando
         el número de la posición del supuesto número mínimo con los números de las demás posiciones.
         Luego de esto, si la posición del número mínimo cambió, se intercambian la posición del número
-        mínimo anterios y la del nuevo
+        mínimo anterios y la del nuevo.
 
         :param array: arreglo desordenado
-        :return: arreglo ordenado
+        :return: tiempo que demora el ordenamiento
         """
+        before_time = time.time()
         for i in range(len(array) - 1):
             minim = i
             for j in range(i + 1, len(array)):
@@ -52,7 +82,8 @@ class Sort:
                 ordered_num = array[i]
                 array[i] = array[minim]
                 array[minim] = ordered_num
-        return array
+
+        return before_time - time.time()
 
     def doRadixSort(self, array):
         """
@@ -61,8 +92,9 @@ class Sort:
         buscando desde unidades, decenas, en adelante.
 
         :param array: arreglo desordenado
-        :return: arreglo ordenado
+        :return: tiempo que demora el ordenamiento
         """
+        before_time = time.time()
         bucketsLength = 10
         maxLenNum = False
         decimalCount = 1  # Se inicializa decimalCount en 1
@@ -87,35 +119,30 @@ class Sort:
                     array[arrayPos] = i
                     arrayPos += 1
             decimalCount *= bucketsLength
-        return array
 
-    def doQuickSort(self, array):
-        """
-        Ordena el arreglo, dividiendolo en tres sub listas, donde el pivote es el primer número del arreglo.
-        Las sublistas se llenan con los números menores que el pivote a la lista izquierda, mayores a la lista derecha
-        e iguales a la lista centro, luego, hace una llamada recursiva con la lista de la izquierda y la derecha,
-        concatenandolas con la del centro
+        return before_time - time.time()
 
-        :param array: arreglo desordenado
-        :return: arreglo ordenado
-        """
-        left = []
-        center = []
-        right = []
-        if len(array) > 1:
-            pivot = array[0]
-            for i in array:
-                # Para ascendente <
-                if i > pivot:
-                    left.append(i)
-                elif i == pivot:
-                    center.append(i)
-                # Para ascendente >
-                elif i < pivot:
-                    right.append(i)
-            return self.doQuickSort(left) + center + self.doQuickSort(right)
-        else:
+    def quickSort(self, array):
+        if len(array) <= 1:
             return array
+        smaller = []
+        equal = []
+        larger = []
+        pivot = array[random.randint(0, len(array) - 1)]
+
+        for x in array:
+            if x < pivot:
+                smaller.append(x)
+            elif x == pivot:
+                equal.append(x)
+            else:
+                larger.append(x)
+
+        larger = self.quickSort(larger)
+        smaller = self.quickSort(smaller)
+
+        final = larger + equal + smaller
+        return final
 
     def merge_sort(self, array):
         """

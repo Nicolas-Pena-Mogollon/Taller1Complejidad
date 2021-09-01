@@ -20,31 +20,27 @@ class Controller:
         :return: las opciones del menú
         """
         number_type = "3"
-        array = []
         while number_type != "0":
             number_type = self.view.askNumberType()
 
             # Se pide el tipo de entrada
             if number_type == "0":
                 self.view.printData("Gracias!")
-
+                break
             elif number_type == "1":
-                # Aleatorios
-                random_quantity = self.manageRandomNumOption()
-                if random_quantity == 0:
+                # Generados
+                array = self.manageOrderOption()
+                if len(array) == 0:
                     break
-                array = self.model.createRandomList(random_quantity)
 
             elif number_type == "2":
                 array = self.manageManualOption()
-                if len(array) == 0:
-                    continue
 
             else:
                 self.view.printData("Opción incorrecta")
                 continue
 
-            print(self.manageSortOption(array))
+            self.manageSortOption(array)
 
     def manageSortOption(self, numbers_array):
         """
@@ -60,17 +56,9 @@ class Controller:
             if sort_option == "0":
                 self.view.printData("Gracias!")
             elif sort_option == "1":
-                beforeTime = time.time()
-                array = self.model.doBubbleSort(numbers_array)
-                lastTime = (time.time() - beforeTime) * 1000
-                print(lastTime)
-                return array
+                return self.model.doBubbleSort(numbers_array)
             elif sort_option == "2":
-                beforeTime = time.time()
-                array = self.model.doSelectionSort(numbers_array)
-                lastTime = (time.time() - beforeTime) * 1000
-                print(lastTime)
-                return array
+                return self.model.doSelectionSort(numbers_array)
             elif sort_option == "3":
                 beforeTime = time.time()
                 array = self.model.doRadixSort(numbers_array)
@@ -79,7 +67,8 @@ class Controller:
                 return array
             elif sort_option == "4":
                 beforeTime = time.time()
-                array = self.model.doQuickSort(numbers_array)
+                array = self.model.quickSort(numbers_array)
+                print(array)
                 lastTime = (time.time() - beforeTime) * 1000
                 print(lastTime)
                 return array
@@ -114,6 +103,35 @@ class Controller:
                 return 4000000
             elif rand_num_option == "5":
                 return 40000000
+            else:
+                self.view.printData("Opción incorrecta")
+
+    def manageOrderOption(self):
+        order_option = ""
+        while order_option != "0":
+            order_option = self.view.askNumbersOrder()
+
+            if order_option == "0":
+                return 0
+
+            elif order_option == "1":
+                quantity = self.manageRandomNumOption()
+                if quantity == 0:
+                    return []
+                return self.model.createAscendingList(quantity)
+
+            elif order_option == "2":
+                quantity = self.manageRandomNumOption()
+                if quantity == 0:
+                    return []
+                return self.model.createDescendingList(quantity)
+
+            elif order_option == "3":
+                quantity = self.manageRandomNumOption()
+                if quantity == 0:
+                    return []
+                return self.model.createRandomList(quantity)
+
             else:
                 self.view.printData("Opción incorrecta")
 
