@@ -56,6 +56,7 @@ class Sort:
         for i in range(len(array) - 1):
             for j in range(i, len(array)):
                 if array[i] < array[j]:
+                    print("Verga sapo perro hp")
                     aux = array[i]
                     array[i] = array[j]
                     array[j] = aux
@@ -128,7 +129,7 @@ class Sort:
         smaller = []
         equal = []
         larger = []
-        pivot = array[random.randint(0, len(array) - 1)]
+        pivot = array[int(len(array)/2)]
 
         for x in array:
             if x < pivot:

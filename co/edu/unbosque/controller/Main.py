@@ -7,5 +7,8 @@ class Main:
 
 
 if __name__ == "__main__":
-    main = Main()
-
+    try:
+        main = Main()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        exit()
