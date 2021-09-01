@@ -40,7 +40,9 @@ class Controller:
                 self.view.printData("Opción incorrecta")
                 continue
 
-            self.manageSortOption(array)
+            takedTime = self.manageSortOption(array)
+            if takedTime == -1:
+                number_type = "0"
 
     def manageSortOption(self, numbers_array):
         """
@@ -55,6 +57,7 @@ class Controller:
             #  Opciones de ordenamiento
             if sort_option == "0":
                 self.view.printData("Gracias!")
+                return -1
             elif sort_option == "1":
                 return self.model.doBubbleSort(numbers_array)
             elif sort_option == "2":
@@ -62,20 +65,19 @@ class Controller:
             elif sort_option == "3":
                 beforeTime = time.time()
                 array = self.model.doRadixSort(numbers_array)
-                lastTime = (time.time() - beforeTime) * 1000
+                lastTime = (time.time() - beforeTime)
                 print(lastTime)
                 return array
             elif sort_option == "4":
                 beforeTime = time.time()
                 array = self.model.quickSort(numbers_array)
-                print(array)
-                lastTime = (time.time() - beforeTime) * 1000
+                lastTime = (time.time() - beforeTime)
                 print(lastTime)
                 return array
             elif sort_option == "5":
                 beforeTime = time.time()
                 array = self.model.merge_sort(numbers_array)
-                lastTime = (time.time() - beforeTime) * 1000
+                lastTime = (time.time() - beforeTime)
                 print(lastTime)
                 return array
             else:
@@ -112,7 +114,7 @@ class Controller:
             order_option = self.view.askNumbersOrder()
 
             if order_option == "0":
-                return 0
+                return []
 
             elif order_option == "1":
                 quantity = self.manageRandomNumOption()
