@@ -14,26 +14,27 @@ class Controller:
 
         """
         Coordina el menú de acuerdo a los datos de ingreso, primero pide el tipo de entrada, luego pide la cantidad
-        de números a generar si se escogio números aleatorios o pide que se ingresen los números manuales y por
-        último pide el ingreso de la opción del tipo de algoritmo para ordenar
+        de números a generar si se escogió números aleatorios o pide que se ingresen los números manuales y por
+        último, el ingreso de la opción del tipo de algoritmo para ordenar
 
-        :return: las opciones del menú
+        :return: None
         """
-        number_type = "3"
-        while number_type != "0":
-            number_type = self.view.askNumberType()
+        entry_Option = "3"
+        while entry_Option != "0":
+            entry_Option = self.view.askEntryType()
 
             # Se pide el tipo de entrada
-            if number_type == "0":
+            if entry_Option == "0":
                 self.view.printData("Gracias!")
                 break
-            elif number_type == "1":
+            elif entry_Option == "1":
                 # Generados
                 array = self.manageOrderOption()
                 if len(array) == 0:
                     break
 
-            elif number_type == "2":
+            elif entry_Option == "2":
+                # Entrada Manual
                 array = self.manageManualOption()
 
             else:
@@ -42,7 +43,7 @@ class Controller:
 
             takedTime = self.manageSortOption(array)
             if takedTime == -1:
-                number_type = "0"
+                entry_Option = "0"
 
     def manageSortOption(self, numbers_array):
         """
@@ -77,7 +78,7 @@ class Controller:
             elif sort_option == "4":
                 print("Espere mientras se organizan los valores")
                 beforeTime = time.time()
-                self.model.quickSort(numbers_array)
+                self.model.doQuickSort(numbers_array)
                 print("El tiempo obtenido fue: " + str((time.time() - beforeTime)))
                 return 0
             elif sort_option == "5":
@@ -115,6 +116,10 @@ class Controller:
                 self.view.printData("Opción incorrecta")
 
     def manageOrderOption(self):
+        """
+        Consulta el tipo de orden del arreglo a generar
+        :return: Arreglo de los números en el orden solicitado
+        """
         order_option = ""
         while order_option != "0":
             order_option = self.view.askNumbersOrder()
@@ -153,7 +158,7 @@ class Controller:
 
         :return: array con los números ingresados manualmente
         """
-        num_array = self.view.askForNumbers().split(",")
+        num_array = self.view.askManualNumbers().split(",")
         try:
             for i in range(len(num_array)):
                 num_array[i] = int(num_array[i].strip())

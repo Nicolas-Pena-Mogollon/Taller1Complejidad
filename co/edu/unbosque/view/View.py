@@ -23,7 +23,7 @@ class View:
                        "\n3. 400000 \n4. 4000000\n5. 40000000")
         return option
 
-    def askNumberType(self):
+    def askEntryType(self):
         """
         Pide que tipo de entrada solicitar (aleatoria o manual)
 
@@ -33,7 +33,7 @@ class View:
                            "\n2. Ingreso manual")
         return numberType
 
-    def askForNumbers(self):
+    def askManualNumbers(self):
         """
         Pide y recibe los números escogidos manualmente
 

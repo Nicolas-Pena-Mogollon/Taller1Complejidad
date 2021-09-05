@@ -122,7 +122,16 @@ class Sort:
 
         return before_time - time.time()
 
-    def quickSort(self, array):
+    def doQuickSort(self, array):
+        """
+        Ordena el arreglo, dividiendolo en tres sub listas, donde el pivote es el primer número del arreglo.
+        Las sublistas se llenan con los números menores que el pivote a la lista izquierda, mayores a la lista derecha
+        e iguales a la lista centro, luego, hace una llamada recursiva con la lista de la izquierda y la derecha,
+        concatenandolas con la del centro
+
+        :param array: array de números a ordenar
+        :return: array de números ordenados
+        """
         if len(array) <= 1:
             return array
         left = []
@@ -138,8 +147,8 @@ class Sort:
             else:
                 right.append(x)
 
-        right = self.quickSort(right)
-        left = self.quickSort(left)
+        right = self.doQuickSort(right)
+        left = self.doQuickSort(left)
 
         final = right + equal + left
         return final
@@ -160,9 +169,9 @@ class Sort:
             middle = int(len(array) / 2)  # Se divide la longitud del arreglo a la mitad
             right = self.merge_sort(array[:middle])  # Merge sort a la primera mitad
             left = self.merge_sort(array[middle:])  # Merge sort a la segunda mitad
-            return self.merge(right, left)
+            return self.doMerge(right, left)
 
-    def merge(self, right, left):
+    def doMerge(self, right, left):
 
         """
         Se intercala y ordena la división de los arreglos, comparando los números de ambos
