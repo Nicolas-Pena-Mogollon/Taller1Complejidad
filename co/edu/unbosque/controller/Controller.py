@@ -1,7 +1,7 @@
 import time
 
-from co.edu.unbosque.view.View import View
 from co.edu.unbosque.model.Sort import Sort
+from co.edu.unbosque.view.View import View
 
 
 class Controller:
@@ -19,21 +19,21 @@ class Controller:
 
         :return: None
         """
-        entry_Option = "3"
-        while entry_Option != "0":
-            entry_Option = self.view.askEntryType()
+        entry_option = "3"
+        while entry_option != "0":
+            entry_option = self.view.askEntryType()
 
             # Se pide el tipo de entrada
-            if entry_Option == "0":
+            if entry_option == "0":
                 self.view.printData("Gracias!")
                 break
-            elif entry_Option == "1":
+            elif entry_option == "1":
                 # Generados
                 array = self.manageOrderOption()
                 if len(array) == 0:
                     break
 
-            elif entry_Option == "2":
+            elif entry_option == "2":
                 # Entrada Manual
                 array = self.manageManualOption()
 
@@ -41,9 +41,9 @@ class Controller:
                 self.view.printData("Opción incorrecta")
                 continue
 
-            takedTime = self.manageSortOption(array)
-            if takedTime == -1:
-                entry_Option = "0"
+            time_taken = self.manageSortOption(array)
+            if time_taken == -1:
+                entry_option = "0"
 
     def manageSortOption(self, numbers_array):
         """
@@ -70,22 +70,22 @@ class Controller:
 
             elif sort_option == "3":
                 print("Espere mientras se organizan los valores")
-                beforeTime = time.time()
+                before_time = time.time()
                 self.model.doRadixSort(numbers_array)
-                print("El tiempo obtenido fue: " + str((time.time() - beforeTime)))
+                print("El tiempo obtenido fue: " + str((time.time() - before_time)))
                 return 0
 
             elif sort_option == "4":
                 print("Espere mientras se organizan los valores")
-                beforeTime = time.time()
+                before_time = time.time()
                 self.model.doQuickSort(numbers_array)
-                print("El tiempo obtenido fue: " + str((time.time() - beforeTime)))
+                print("El tiempo obtenido fue: " + str((time.time() - before_time)))
                 return 0
             elif sort_option == "5":
                 print("Espere mientras se organizan los valores")
-                beforeTime = time.time()
+                before_time = time.time()
                 self.model.merge_sort(numbers_array)
-                print("El tiempo obtenido fue: " + str((time.time() - beforeTime)))
+                print("El tiempo obtenido fue: " + str((time.time() - before_time)))
                 return 0
             else:
                 self.view.printData("Opción incorrecta")
