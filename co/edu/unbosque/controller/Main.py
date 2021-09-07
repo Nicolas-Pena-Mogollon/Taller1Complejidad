@@ -1,3 +1,9 @@
+"""
+Created on Sept 6,2021
+
+@author: Nicolás Peña Mogollón - María Camila Lozano Gutiérrez
+"""
+
 from co.edu.unbosque.controller.Controller import Controller
 
 

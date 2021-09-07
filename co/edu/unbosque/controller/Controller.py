@@ -1,3 +1,9 @@
+"""
+Created on Sept 6,2021
+
+@author: Nicolás Peña Mogollón - María Camila Lozano Gutiérrez
+"""
+
 import time
 
 from co.edu.unbosque.model.Sort import Sort
